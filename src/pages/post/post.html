@@ -1,0 +1,49 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title> {{ titulo | placeHolder:'Sin titulo' }} </ion-title>
+    <ion-buttons >
+      <button ion-button icon-only (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="createPost()">
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  
+
+</ion-header>
+
+
+<ion-content >
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Title Post</ion-label>
+      <ion-input type="text" [(ngModel)]="titulo" ></ion-input>
+    </ion-item>
+  
+    <ion-item *ngIf="imgPreview" >
+      <img [src]="imgPreview" >
+    </ion-item>
+  
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col >
+        <button ion-button block (click)="selectPhoto()">
+          <ion-icon name="photos">Seleccionar</ion-icon>
+        </button>
+      </ion-col>
+      <ion-col >
+        <button ion-button block>
+          <ion-icon name="camera" (click)="showCam()">Camara</ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
