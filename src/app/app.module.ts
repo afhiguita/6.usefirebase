@@ -8,12 +8,12 @@ import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
 
 
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { PostPage } from '../pages/post/post';
+import { MyApp } from '../app/app.component';
+import { HomePage, PostPage, AddPostPage, EditPostPage } from '../pages/index.pages';
+
 
 //Pipes
-import { PipesModule } from './../pipes/pipes.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 //Firebase Modules
 import { AngularFireModule } from 'angularfire2';
@@ -21,19 +21,19 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 //Firebase Config
-import { firebaseConfig } from './firebase.credenctial';
+import { fb_Config } from '../app/firebase.credenctial';
 import { LoadFileProvider } from '../providers/load-file/load-file';
+import { PostControlProvider } from '../providers/post-control/post-control';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    PostPage
+    HomePage, PostPage, AddPostPage, EditPostPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig,'demo104'),
+    AngularFireModule.initializeApp(fb_Config),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     PipesModule
@@ -41,8 +41,7 @@ import { LoadFileProvider } from '../providers/load-file/load-file';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    PostPage
+    HomePage, PostPage, AddPostPage, EditPostPage
   ],
   providers: [
     StatusBar,
@@ -51,6 +50,7 @@ import { LoadFileProvider } from '../providers/load-file/load-file';
     ImagePicker,
     AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PostControlProvider,
     LoadFileProvider
   ]
 })

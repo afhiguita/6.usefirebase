@@ -1,0 +1,45 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ post.title | placeHolder }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Title</ion-label>
+      <ion-input type="text" [(ngModel)]="post.title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-textarea [(ngModel)]="post.description"></ion-textarea>
+    </ion-item>
+
+    <ion-item *ngIf="post.img" >
+      <img [src]="post.img" >
+    </ion-item>
+
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col >
+        <button ion-button block (click)="selectPhoto()">
+          <ion-icon name="photos">Seleccionar</ion-icon>
+        </button>
+      </ion-col>
+      <ion-col >
+        <button ion-button block>
+          <ion-icon name="camera" (click)="showCam()">Camara</ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <button ion-button block clear (click)="updatePost(post)">Save</button>
+  <button ion-button block clear (click)="removePost(post)">Delete</button>
+</ion-content>

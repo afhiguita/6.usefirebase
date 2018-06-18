@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { PlaceHolderPipe } from './place-holder/place-holder';
+import { PlaceHolderPipe } from '../pipes/place-holder/place-holder';
 @NgModule({
 	declarations: [PlaceHolderPipe],
 	imports: [],
