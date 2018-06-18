@@ -40,18 +40,17 @@ export class AddPostPage {
   //Adding the new records and closing the Modal Page
   addPost(obj: PostModel) {
     console.log("Loading img...");
-    //let file = {
-    //  img: this.post.img,
-    //  title: this.post.title, 
-    //  description: this.post.description
-    //};
-    let promesa: any = this.loadFileProv.loadImg_to_firebase(this.previewImg);
-    console.log(promesa);
+    
+    console.log("guardando archivo");
+    let imgURL = this.loadFileProv.loadImg_to_firebase(this.post.img);
+
+    console.log(imgURL);
+    
     this.plcProv.addPost(obj).then(
       (error) => {
         console.log("Error agregando el registro");
       }, () => {
-      //this.viewCtrl.dismiss();
+      this.viewCtrl.dismiss();
     });
   }
 
@@ -72,7 +71,7 @@ export class AddPostPage {
      // imageData is either a base64 encoded string or a file URI
      // If it's base64:
      //let base64Image = 'data:image/jpeg;base64,' + imageData;
-     //this.imgPreview = 'data:image/jpeg;base64,' + imageData;
+     this.previewImg = 'data:image/jpeg;base64,' + imageData;
      this.post.img = imageData;
 
     }, (err) => {
@@ -84,18 +83,18 @@ export class AddPostPage {
 
   selectPhoto(){
     let options: ImagePickerOptions = {
-      quality: 50,
+      quality: 100,
       maximumImagesCount: 1,
       outputType:1
     }
     this.imagePicker.getPictures( options).then((results) => {
       for (var i = 0; i < results.length; i++) {
-          //console.log('Image URI: ' + results[i]);
+          console.log('Image URI: ' + results[i]);
           this.previewImg = 'data:image/jpeg;base64,' + results[i];
           this.post.img = results[i];
       }
     }, (err) => {
-      console.error("Error en selecctor: ", JSON.stringify(err));
+      console.error("Error en selector: ", JSON.stringify(err));
     });
     
   }

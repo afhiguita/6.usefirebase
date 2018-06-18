@@ -9,7 +9,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 
 
 import { MyApp } from '../app/app.component';
-import { HomePage, PostPage, AddPostPage, EditPostPage } from '../pages/index.pages';
+import { HomePage, AddPostPage, EditPostPage } from '../pages/index.pages';
 
 
 //Pipes
@@ -28,7 +28,7 @@ import { PostControlProvider } from '../providers/post-control/post-control';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage, PostPage, AddPostPage, EditPostPage
+    HomePage, AddPostPage, EditPostPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +41,7 @@ import { PostControlProvider } from '../providers/post-control/post-control';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage, PostPage, AddPostPage, EditPostPage
+    HomePage, AddPostPage, EditPostPage
   ],
   providers: [
     StatusBar,

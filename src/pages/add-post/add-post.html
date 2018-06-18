@@ -1,11 +1,14 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{ post.title | placeHolder: 'Post sin titulo' }} </ion-title>
+    <ion-buttons>
+      <button ion-button only-icon>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
-
 
 <ion-content padding>
 
@@ -21,8 +24,8 @@
       <ion-textarea [(ngModel)]="post.description"></ion-textarea>
     </ion-item>
 
-    <ion-item *ngIf="post.img" >
-      <img [src]="post.img" >
+    <ion-item *ngIf="previewImg" >
+      <img [src]="previewImg" >
     </ion-item>
 
   </ion-list>

@@ -1,27 +1,26 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import { ToastController } from 'ionic-angular';
 
-//DataModel 
-import { PostModel } from './../../model/post/post.model';
 
 @Injectable()
 export class LoadFileProvider {
 
-  constructor( private ToastCtrl: ToastController ) {
-    console.log('Hello LoadFileProvider Provider');
-  }
+  constructor( private ToastCtrl: ToastController ) {  }
 
+  //Save data on Firebase Storage 
   loadImg_to_firebase( img: string ){
+    let imgURL: string;
+
     let promesa = new Promise( (resolve, reject) => {
       this.showMSG("Cargando...", 3000);
       
       let storageRef = firebase.storage().ref();
       let FileName: string = new Date().valueOf().toString();
 
-      let uploadTask: firebase.storage.UploadTask = storageRef.child('img/${ FileName }')
-      .putString(img, 'base64', { contentType: 'image/jpeg'});
+      let uploadTask: firebase.storage.UploadTask = 
+          storageRef.child(`img/${ FileName }`)
+                    .putString(img, 'base64', { contentType: 'image/jpeg'});
 
       uploadTask.on( firebase.storage.TaskEvent.STATE_CHANGED,
         ()=>{ }, // saber el % de cuantos Mbs se han subido
@@ -33,15 +32,16 @@ export class LoadFileProvider {
         () => {
           console.log("Todo bien");
           this.showMSG("Carga satisfactoria...", 2000);
-          let urlImg = uploadTask.snapshot.downloadURL;
+          imgURL = uploadTask.snapshot.downloadURL;
           resolve();
         }
       )
     })
 
-    return promesa;
+    return imgURL;
   }
 
+  //Display message on screen
   showMSG(msg:string, d: number){
     let toast = this.ToastCtrl.create({
       message: msg,
